@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Love Quiz 💖</title>
+<style>
+body { 
+    margin:0; padding:0; 
+    font-family:'Segoe UI',sans-serif; 
+    background: radial-gradient(circle at top left, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee); 
+    color:#fff; text-align:center;
+}
+.container { 
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:20px;
+}
+h1 { font-size:2.2em; margin-bottom:15px; text-shadow:2px 2px 5px #ff6f91;}
+p { font-size:1.2em; max-width:600px; line-height:1.6; margin-bottom:30px;}
+button { padding:12px 25px; margin:10px; font-size:1em; border:none; border-radius:10px; background: rgba(255,255,255,0.3); color:#fff; cursor:pointer; box-shadow: 0 0 10px rgba(255,255,255,0.5); transition: transform 0.2s;}
+button:hover { transform: scale(1.1); background: rgba(255,255,255,0.5);}
+button:disabled { opacity:0.5; cursor:not-allowed;}
+.hearts { font-size:2em; animation: pulse 1.5s infinite; margin-top:20px;}
+@keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1);}}
+</style>
+</head>
+<body>
+
+<div class="container" id="game">
+<h1>Welcome Baccha ❤️</h1>
+<p>Ready for the ultimate love quiz? 😘</p>
+<button onclick="nextStep()">Start 💖</button>
+</div>
+
+<script>
+let game = document.getElementById('game');
+let step = 0;
+
+// Correct answers mapping
+let correctAnswers = {
+    1: [3],
+    2: [1],
+    3: [1],
+    4: [1],
+    5: [1],
+    6: [2],
+    7: [1,3],
+    8: [3],
+    9: [3],
+    10: [1,3]
+};
+
+// Correct answer messages
+let messages = {
+    1:"Har time! 😍 Tum meri zindagi ka sabse pyara hissa ho 💖",
+    2:"Baatein krna 😘 Mere liye har baat tumhare sath special hai 💞",
+    3:"Apse baat karna 💕 Mere din ka sabse khubsurat pal hai 😇",
+    4:"Bed room + gal 💖 Ye moment hamesha yaadgar hai 😘",
+    5:"Password correct! 😍 Tum itne smart ho 💕",
+    6:"Pad dekh liya! 😘 Ye sab jaankar maza aaya 💖",
+    7:"Rona? 😢 Koi baat nahi, mai hamesha sath hoon 💖",
+    8:"Sid ka! 😎 Ye perfect nickname hai 💕",
+    9:"Apki godi mai 💖 Tumhara sath sabse comfort hai 😘",
+    10:"Gal kichna & Thappad mrna 😅 Tumhare sath maza aata hai 💖"
+};
+
+function arraysEqual(a,b){if(a.length!==b.length)return false;a.sort();b.sort();return a.every((val,i)=>val===b[i]);}
+
+function nextStep(){ step++; showQuestion(); }
+
+function showQuestion(){
+    switch(step){
+        case 1: game.innerHTML=`<h1>Q1: Mai tumhe kitna yaad krta houga ek din mai?</h1>
+        <button onclick="showMsg(1,[1])">Kbhi nhi ❌</button>
+        <button onclick="showMsg(1,[2])">Thoda thoda 🙂</button>
+        <button onclick="showMsg(1,[3])">Har time 💖</button>`; break;
+        case 2: game.innerHTML=`<h1>Q2: Hum dono ko sath mai kya krna psd hai?</h1>
+        <button onclick="showMsg(2,[1])">Baatein krna 🗣️</button>
+        <button onclick="showMsg(2,[2])">Ladna 😅</button>
+        <button onclick="showMsg(2,[3])">Dekhna ek dusra ko 👀</button>`; break;
+        case 3: game.innerHTML=`<h1>Q3: Mujhe sabse zyada kya psd hai meri life mai?</h1>
+        <button onclick="showMsg(3,[1])">Apse baat 💕</button>
+        <button onclick="showMsg(3,[2])">Dosto ka sath baithna 👯</button>
+        <button onclick="showMsg(3,[3])">Sona 😴</button>`; break;
+        case 4: game.innerHTML=`<h1>Q4: Mena tumha first kiss kaha ki thi + body part?</h1>
+        <button onclick="showMsg(4,[1])">Bed room + gal 💖</button>
+        <button onclick="showMsg(4,[2])">Bathroom + hol 🚿</button>
+        <button onclick="showMsg(4,[3])">Balcony + head 🌹</button>`; break;
+        case 5: game.innerHTML=`<h1>Q5: Mera ph ka lock screen password kya hai?</h1>
+        <button onclick="showMsg(5,[1])">0000</button>
+        <button onclick="showMsg(5,[2])">4573</button>
+        <button onclick="showMsg(5,[3])">1134</button>`; break;
+        case 6: game.innerHTML=`<h1>Q6: Mena tumha pad kyu kiya hoga?</h1>
+        <button onclick="showMsg(6,[1])">Asa hi</button>
+        <button onclick="showMsg(6,[2])">Sid mai sb kuch dika</button>
+        <button onclick="showMsg(6,[3])">Baatein acchi lagi</button>`; break;
+        case 7: game.innerHTML=`<h1>Q7: Mujhe ap mai kya nhi psd?</h1>
+        <button onclick="showMsg(7,[1])">Gussa 😡</button>
+        <button onclick="showMsg(7,[2])">Ap hi 💖</button>
+        <button onclick="showMsg(7,[3])">Rona 😢</button>`; break;
+        case 8: game.innerHTML=`<h1>Q8: Mujhe dost kya bulata hai?</h1>
+        <button onclick="showMsg(8,[1])">Tannu</button>
+        <button onclick="showMsg(8,[2])">Tanmay</button>
+        <button onclick="showMsg(8,[3])">Sid ka</button>`; break;
+        case 9: game.innerHTML=`<h1>Q9: Mujhe kahan sona psd hai?</h1>
+        <button onclick="showMsg(9,[1])">Zamin kar 💤</button>
+        <button onclick="showMsg(9,[2])">Bed par 🛏️</button>
+        <button onclick="showMsg(9,[3])">Apki godi mai 💕</button>`; break;
+        case 10: game.innerHTML=`<h1>Q10: Mujhe kya krna psd hai apka sath naughty things?</h1>
+        <button onclick="showMsg(10,[1])">Gal kichna 😅</button>
+        <button onclick="showMsg(10,[2])">Hand holding ✋</button>
+        <button onclick="showMsg(10,[3])">Thappad mrna 👋</button>`; break;
+        default: game.innerHTML=`<h1>Congratulations! 🎉</h1>
+        <p>Tumne sab questions sahi solve kar liye 💖</p>
+        <div class="hearts">💖💞💘</div>`; break;
+    }
+}
+
+function showMsg(qNum, selected){
+    let correct = correctAnswers[qNum];
+    if(arraysEqual(selected, correct) || correct.includes(selected[0])){
+        game.innerHTML=`<h1>Special Message 💌</h1>
+        <p>${messages[qNum]}</p>
+        <div class="hearts">💖💞💘</div>
+        <button onclick="nextStep()">Next ⏩</button>`;
+    } else {
+        let countdown = 10;
+        game.innerHTML=`<h1>Oops! ❌</h1>
+        <p>Galat! 😅 Real life mein turant "Love U" likhna padega 😘</p>
+        <p>Try again in <span id="timer">${countdown}</span> seconds ⏳</p>`;
+        let timer = setInterval(()=>{
+            countdown--;
+            document.getElementById("timer").innerText = countdown;
+            if(countdown<=0){
+                clearInterval(timer);
+                showQuestion(); // fir se question dikhaye
+            }
+        },1000);
+    }
+}
+</script>
+
+</body>
+</html>
